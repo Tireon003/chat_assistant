@@ -1,7 +1,6 @@
 from swarm import Swarm, Agent
 from openai import OpenAI
 import logging
-from dependency_injector.wiring import inject, Provide
 
 from server.config import settings
 from server.src.schemas import ClientRequest, AssistantResponse
@@ -73,10 +72,8 @@ agent_triage.functions.extend(
 class SwarmService:
     """Сервис для взаиммодействия с сетью агентов"""
 
-    # @inject
     def __init__(
         self,
-        # client: Swarm,
     ) -> None:
         self._client = Swarm(  # fixme do inject instead of hardcode
             OpenAI(
@@ -84,7 +81,6 @@ class SwarmService:
                 base_url=settings.OPENAI_BASE_URL,
             )
         )
-        # self._client = client
         self.agent = agent_triage  # fixme do inject instead of hardcode
 
     def request(self, request: ClientRequest) -> AssistantResponse:

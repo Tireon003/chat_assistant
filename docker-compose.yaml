@@ -1,0 +1,21 @@
+services:
+
+  assistant_bot:
+    build:
+      context: .
+      dockerfile: client/Dockerfile
+    env_file: .env
+    restart: on-failure
+    command: bash -c "python3 client/main.py"
+    depends_on:
+      - assistant_server
+
+  assistant_server:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    env_file: .env
+    restart: on-failure
+    command: bash -c "uvicorn server.main:app --host 0.0.0.0 --port 8000"
+    ports:
+      - 8000:8000
