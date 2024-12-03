@@ -3,13 +3,14 @@ from openai import OpenAI
 from swarm import Swarm
 
 from server.config import settings
-from server.src.services import SwarmService
 
 
 class SwarmContainer(containers.DeclarativeContainer):
+
     wiring_config = containers.WiringConfiguration(
-        packages=["server.src.routers.messages_router"]
+        modules=["..depends"],
     )
+
     config = providers.Configuration()
 
     openai_instance = providers.Singleton(
@@ -18,6 +19,4 @@ class SwarmContainer(containers.DeclarativeContainer):
         base_url=settings.OPENAI_BASE_URL,
     )
 
-    swarm_instance = providers.Factory(Swarm, client=openai_instance.provider)
-
-    service = providers.Factory(SwarmService, client=swarm_instance)
+    swarm_instance = providers.Factory(Swarm, client=openai_instance)
