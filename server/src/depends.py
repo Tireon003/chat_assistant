@@ -1,18 +1,17 @@
 from dependency_injector.wiring import inject, Provide
+from fastapi import Depends
+import logging
 
 from server.src.containers import SwarmContainer
 from server.src.services import SwarmService
 
+logger = logging.getLogger(__name__)
 
-# @inject
+
+@inject
 def get_swarm_service(
-    # client: Swarm = Provide[SwarmContainer.swarm_instance],
+    swarm_instance: SwarmService = Depends(
+        Provide[SwarmContainer.swarm_instance]
+    ),
 ) -> SwarmService:
-    # return SwarmService(client=client)
-    return SwarmService()
-
-
-# @inject
-# def get_swarm_service():
-#     ...
-#     # return SwarmService(client=client)
+    return SwarmService(swarm_instance)

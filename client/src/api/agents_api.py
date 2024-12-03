@@ -7,7 +7,7 @@ class AgentsAPI:
     async def send_message(message: str) -> str:
         async with aiohttp.ClientSession() as session:
             async with session.post(
-                url="http://localhost:8000/api/v1/messages/",
+                url="http://assistant_server:8000/api/v1/messages/",
                 json=dict(
                     message=message,
                 ),

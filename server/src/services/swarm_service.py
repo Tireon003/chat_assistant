@@ -74,17 +74,8 @@ class SwarmService:
     """Сервис для взаиммодействия с сетью агентов"""
 
     # @inject
-    def __init__(
-        self,
-        # client: Swarm,
-    ) -> None:
-        self._client = Swarm(  # fixme do inject instead of hardcode
-            OpenAI(
-                api_key=settings.OPENAI_API_KEY,
-                base_url=settings.OPENAI_BASE_URL,
-            )
-        )
-        # self._client = client
+    def __init__(self, client: Swarm) -> None:
+        self._client = client
         self.agent = agent_triage  # fixme do inject instead of hardcode
 
     def request(self, request: ClientRequest) -> AssistantResponse:
