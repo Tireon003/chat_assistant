@@ -6,7 +6,11 @@ from client.src.handlers import commands_handler, chating_handler
 from client.config import settings
 
 
-logging.basicConfig(level=settings.LOG_LEVEL)
+logging.basicConfig(
+    level=settings.LOG_LEVEL,
+    format=settings.LOG_FORMAT,
+    datefmt="%Y-%m-%d %H:%M:%S",
+)
 
 
 async def main():

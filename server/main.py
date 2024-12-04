@@ -5,7 +5,11 @@ from server.config import settings
 from server.src.containers import SwarmContainer
 from server.src.routers import messages_router
 
-logging.basicConfig(level=settings.LOG_LEVEL)
+logging.basicConfig(
+    level=settings.LOG_LEVEL,
+    format=settings.LOG_FORMAT,
+    datefmt="%Y-%m-%d %H:%M:%S",
+)
 logger = logging.getLogger(__name__)
 
 

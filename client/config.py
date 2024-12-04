@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     OPENAI_MODEL_NAME: str
     OPENAI_BASE_URL: str
     LOG_LEVEL: str
+    LOG_FORMAT: str
 
     model_config = SettingsConfigDict(
         env_file="../.env",
