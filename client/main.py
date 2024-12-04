@@ -1,4 +1,5 @@
 from aiogram import Bot, Dispatcher
+from aiogram.utils.chat_action import ChatActionMiddleware
 import asyncio
 import logging
 
@@ -18,6 +19,7 @@ async def main():
     dp = Dispatcher()
     dp.include_router(commands_handler)
     dp.include_router(chating_handler)
+    dp.message.middleware(ChatActionMiddleware())
     await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)
 
