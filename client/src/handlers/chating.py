@@ -9,7 +9,7 @@ router = Router(name="chating_router")
 @flags.chat_action("typing")
 async def handle_query_text(message: types.Message) -> None:
     if len(message.text) < 6:
-        await message.reply(
+        return await message.reply(
             text="Текст запроса слишком короткий (менее 6 символов)!"
         )
 
